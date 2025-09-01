@@ -1,6 +1,16 @@
 .App {
-  text-align: left;
+  width: 100%;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Ensure all child components take full width */
+.App > * {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* Reset default styles */

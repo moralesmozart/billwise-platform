@@ -3,24 +3,25 @@ import styled from 'styled-components';
 import { Upload, ArrowRight, TrendingDown, CheckCircle, X } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 
-// Styled Components
+// Main Container - Full width
 const LandingContainer = styled.div`
   min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  width: 100%;
+  overflow-x: hidden;
 `;
 
-// Hero Section
+// Hero Section - Full width
 const HeroSection = styled.section`
   position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  width: 100%;
   overflow: hidden;
 `;
 
+// Hero Background - Full width
 const HeroBackground = styled.div`
   position: absolute;
   top: 0;
@@ -28,6 +29,8 @@ const HeroBackground = styled.div`
   right: 0;
   bottom: 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  width: 100%;
+  height: 100%;
   z-index: 1;
 `;
 
@@ -63,12 +66,15 @@ const FloatingIconRight = styled.div<{ top: string; right: string; animationDela
   }
 `;
 
+// Hero Content - Full width with proper centering
 const HeroContent = styled.div`
-  max-width: 1200px;
-  width: 100%;
-  text-align: center;
-  z-index: 3;
   position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 40px 20px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 `;
 
 const HeroTitle = styled.h1`
@@ -98,46 +104,37 @@ const HeroSubtitle = styled.h2`
   }
 `;
 
+// Language Cards Grid - Full width responsive
 const LanguageCardsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-  margin-top: 3rem;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 15px;
+  }
 `;
 
+// Language Card - Full width within grid
 const LanguageCard = styled.div<{ isHovered: boolean }>`
   background: white;
   border-radius: 20px;
-  padding: 32px 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  padding: 40px 30px;
+  text-align: center;
   cursor: pointer;
-  border: 2px solid transparent;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
   
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
-    border-color: #667eea;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.5s;
-  }
-
-  &:hover::before {
-    left: 100%;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -181,16 +178,17 @@ const LanguageCTA = styled.button`
   }
 `;
 
-// Fast Track CTA Section
+// Fast Track Section - Full width
 const FastTrackSection = styled.section`
-  padding: 60px 20px;
+  padding: 80px 20px;
   background: white;
   text-align: center;
   width: 100%;
 `;
 
+// Fast Track Container - Full width
 const FastTrackContainer = styled.div`
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   width: 100%;
 `;
@@ -242,15 +240,18 @@ const FastTrackCTA = styled.a`
   }
 `;
 
-// Testimonials Section
+// Testimonials Section - Full width
 const TestimonialsSection = styled.section`
   padding: 80px 20px;
   background: #F8F9FA;
+  width: 100%;
 `;
 
+// Testimonials Container - Full width
 const TestimonialsContainer = styled.div`
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  width: 100%;
 `;
 
 const TestimonialsTitle = styled.h2`
@@ -261,10 +262,18 @@ const TestimonialsTitle = styled.h2`
   margin-bottom: 3rem;
 `;
 
+// Testimonials Grid - Full width responsive
 const TestimonialsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
+  margin-top: 40px;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 `;
 
 const TestimonialCard = styled.div`
@@ -313,15 +322,18 @@ const TestimonialSavings = styled.div`
   font-size: 0.9rem;
 `;
 
-// Form Section
+// Form Section - Full width
 const FormSection = styled.section`
   padding: 80px 20px;
   background: white;
+  width: 100%;
 `;
 
+// Form Container - Full width
 const FormContainer = styled.div`
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
+  width: 100%;
 `;
 
 const FormTitle = styled.h2`
