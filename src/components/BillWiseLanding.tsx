@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { Zap, DollarSign, Upload, Globe, ArrowRight, Star, TrendingDown, Users, CheckCircle, X, Image as ImageIcon } from 'lucide-react';
+import { Upload, ArrowRight, TrendingDown, CheckCircle, X } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 
 // Styled Components
@@ -35,6 +35,22 @@ const FloatingIcon = styled.div<{ top: string; left: string; animationDelay: str
   position: absolute;
   top: ${props => props.top};
   left: ${props => props.left};
+  font-size: 2rem;
+  opacity: 0.6;
+  animation: float 6s ease-in-out infinite;
+  animation-delay: ${props => props.animationDelay};
+  z-index: 2;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+  }
+`;
+
+const FloatingIconRight = styled.div<{ top: string; right: string; animationDelay: string }>`
+  position: absolute;
+  top: ${props => props.top};
+  right: ${props => props.right};
   font-size: 2rem;
   opacity: 0.6;
   animation: float 6s ease-in-out infinite;
@@ -392,13 +408,7 @@ const ImageUploadContainer = styled.div`
   width: 100%;
 `;
 
-const ImageUploadLabel = styled.label`
-  font-weight: 600;
-  color: #2C3E50;
-  font-size: 1rem;
-  margin-bottom: 8px;
-  display: block;
-`;
+// Removed unused styled component
 
 const DropzoneContainer = styled.div<{ isDragActive: boolean }>`
   border: 2px dashed ${props => props.isDragActive ? '#667eea' : '#E8E8E8'};
@@ -679,11 +689,11 @@ const BillWiseLanding: React.FC = () => {
         
         {/* Floating Icons */}
         <FloatingIcon top="10%" left="10%" animationDelay="0s">⚡</FloatingIcon>
-        <FloatingIcon top="20%" right="15%" animationDelay="1s">💸</FloatingIcon>
+        <FloatingIconRight top="20%" right="15%" animationDelay="1s">💸</FloatingIconRight>
         <FloatingIcon top="60%" left="5%" animationDelay="2s">⚡</FloatingIcon>
-        <FloatingIcon top="70%" right="10%" animationDelay="3s">💸</FloatingIcon>
+        <FloatingIconRight top="70%" right="10%" animationDelay="3s">💸</FloatingIconRight>
         <FloatingIcon top="40%" left="20%" animationDelay="4s">⚡</FloatingIcon>
-        <FloatingIcon top="30%" right="25%" animationDelay="5s">💸</FloatingIcon>
+        <FloatingIconRight top="30%" right="25%" animationDelay="5s">💸</FloatingIconRight>
         
         <HeroContent>
           <HeroTitle>BillWise</HeroTitle>
