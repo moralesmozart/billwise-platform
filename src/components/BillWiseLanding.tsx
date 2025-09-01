@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { Upload, ArrowRight, TrendingDown, CheckCircle, X } from 'lucide-react';
+import { Upload, ArrowRight, TrendingDown, X } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
+import TestimonialsCarousel from './TestimonialsCarousel';
 
 // Main Container - Full width
 const LandingContainer = styled.div`
@@ -262,65 +263,7 @@ const TestimonialsTitle = styled.h2`
   margin-bottom: 3rem;
 `;
 
-// Testimonials Grid - Full width responsive
-const TestimonialsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  width: 100%;
-  margin-top: 40px;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-`;
 
-const TestimonialCard = styled.div`
-  background: white;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  border-left: 4px solid #667eea;
-  
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  }
-`;
-
-const TestimonialHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-`;
-
-const TestimonialFlag = styled.div`
-  font-size: 1.5rem;
-`;
-
-const TestimonialOrigin = styled.div`
-  font-weight: 600;
-  color: #667eea;
-  font-size: 0.9rem;
-`;
-
-const TestimonialContent = styled.p`
-  color: #5D6D7E;
-  line-height: 1.6;
-  margin-bottom: 16px;
-`;
-
-const TestimonialSavings = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #27AE60;
-  font-weight: 600;
-  font-size: 0.9rem;
-`;
 
 // Form Section - Full width
 const FormSection = styled.section`
@@ -485,7 +428,7 @@ const RemoveButton = styled.button`
   }
 `;
 
-// Testimonials data
+// Testimonials data - 6 examples as requested
 const testimonials = [
   {
     flag: "🇵🇱",
@@ -518,100 +461,10 @@ const testimonials = [
     savings: "200€/mes"
   },
   {
-    flag: "🇨🇱",
-    origin: "Chile",
-    content: "Chilean colleague discovered hidden fees and saved 350€/year.",
-    savings: "350€/año"
-  },
-  {
-    flag: "🇨🇴",
-    origin: "Colombia",
-    content: "Colombian friend reduced water bill by 40% after fixing leaks identified in the analysis.",
-    savings: "40% reducción"
-  },
-  {
-    flag: "🇵🇪",
-    origin: "Perú",
-    content: "Peruvian customer saved 280€/year by switching to a better energy plan.",
-    savings: "280€/año"
-  },
-  {
-    flag: "🇲🇽",
-    origin: "México",
-    content: "Mexican family reduced combined bills by 35% after comprehensive analysis.",
-    savings: "35% reducción"
-  },
-  {
-    flag: "🇺🇸",
-    origin: "Estados Unidos",
-    content: "American expat saved 600€/year by understanding Spanish energy market.",
-    savings: "600€/año"
-  },
-  {
     flag: "🇬🇧",
-    origin: "Reino Unido",
-    content: "British colleague saved 450€/year by optimizing their energy consumption.",
-    savings: "450€/año"
-  },
-  {
-    flag: "🇫🇷",
-    origin: "Francia",
-    content: "French neighbor reduced bills by 28% after switching providers.",
-    savings: "28% reducción"
-  },
-  {
-    flag: "🇩🇪",
-    origin: "Alemania",
-    content: "German friend saved 380€/year by understanding their energy contract.",
-    savings: "380€/año"
-  },
-  {
-    flag: "🇵🇹",
-    origin: "Portugal",
-    content: "Portuguese colleague reduced electricity bill by 22% after analysis.",
-    savings: "22% reducción"
-  },
-  {
-    flag: "🇳🇱",
-    origin: "Países Bajos",
-    content: "Dutch expat saved 320€/year by optimizing their energy plan.",
-    savings: "320€/año"
-  },
-  {
-    flag: "🇧🇪",
-    origin: "Bélgica",
-    content: "Belgian customer reduced bills by 26% after switching providers.",
-    savings: "26% reducción"
-  },
-  {
-    flag: "🇨🇭",
-    origin: "Suiza",
-    content: "Swiss friend saved 420€/year by understanding their consumption.",
-    savings: "420€/año"
-  },
-  {
-    flag: "🇦🇹",
-    origin: "Austria",
-    content: "Austrian colleague reduced energy costs by 31% after analysis.",
-    savings: "31% reducción"
-  },
-  {
-    flag: "🇸🇪",
-    origin: "Suecia",
-    content: "Swedish customer saved 290€/year by optimizing their contract.",
-    savings: "290€/año"
-  },
-  {
-    flag: "🇳🇴",
-    origin: "Noruega",
-    content: "Norwegian friend reduced bills by 24% after switching providers.",
-    savings: "24% reducción"
-  },
-  {
-    flag: "🇩🇰",
-    origin: "Dinamarca",
-    content: "Danish expat saved 340€/year by understanding their energy plan.",
-    savings: "340€/año"
+    origin: "UK",
+    content: "British colleague discovered hidden fees and saved 350€/year.",
+    savings: "350€/año"
   }
 ];
 
@@ -776,21 +629,7 @@ const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect }) =
       <TestimonialsSection>
         <TestimonialsContainer>
           <TestimonialsTitle>Resultados reales de personas alrededor del mundo</TestimonialsTitle>
-          <TestimonialsGrid>
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard key={index}>
-                <TestimonialHeader>
-                  <TestimonialFlag>{testimonial.flag}</TestimonialFlag>
-                  <TestimonialOrigin>{testimonial.origin}</TestimonialOrigin>
-                </TestimonialHeader>
-                <TestimonialContent>{testimonial.content}</TestimonialContent>
-                <TestimonialSavings>
-                  <CheckCircle size={16} />
-                  {testimonial.savings}
-                </TestimonialSavings>
-              </TestimonialCard>
-            ))}
-          </TestimonialsGrid>
+          <TestimonialsCarousel testimonials={testimonials} />
         </TestimonialsContainer>
       </TestimonialsSection>
 

@@ -103,11 +103,87 @@ const SolutionSection = styled.section`
   backdrop-filter: blur(10px);
 `;
 
+// Solution Grid - 3 cards top row, 1 card bottom row
 const SolutionGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-top: 2rem;
+  width: 100%;
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+`;
+
+// Bottom Card - Takes full width
+const BottomCard = styled.div`
+  grid-column: 1 / -1;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+  width: 100%;
+  
+  &:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 24px 20px;
+  }
+`;
+
+// Bottom Card Content
+const BottomCardContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
+`;
+
+// Bottom Card Icon and Text
+const BottomCardLeft = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 12px;
+  }
+`;
+
+// Bottom Card CTA
+const BottomCardCTA = styled.button`
+  background: linear-gradient(135deg, #28A745 0%, #20C997 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+  }
 `;
 
 const SolutionCard = styled.div`
@@ -274,13 +350,13 @@ const languageContent = {
           icon: "⚡",
           title: "Optimización de Consumo",
           description: "Te enseñamos cuándo usar más energía para pagar menos"
-        },
-        {
-          icon: "🏠",
-          title: "Cambio de Proveedor",
-          description: "Te ayudamos a encontrar la mejor tarifa para tu consumo"
         }
-      ]
+      ],
+      bottomCard: {
+        title: "Análisis Personalizado Completo",
+        description: "Recibe un análisis detallado con recomendaciones específicas para tu caso",
+        cta: "Agendar Análisis"
+      }
     },
     chart: {
       title: "Análisis de Costos y Ahorros",
@@ -328,13 +404,13 @@ const languageContent = {
           icon: "⚡",
           title: "Otimização de Consumo",
           description: "Ensinamos quando usar mais energia para pagar menos"
-        },
-        {
-          icon: "🏠",
-          title: "Mudança de Fornecedor",
-          description: "Ajudamos a encontrar a melhor tarifa para seu consumo"
         }
-      ]
+      ],
+      bottomCard: {
+        title: "Análise Personalizada Completa",
+        description: "Receba uma análise detalhada com recomendações específicas para seu caso",
+        cta: "Agendar Análise"
+      }
     },
     chart: {
       title: "Análise de Custos e Economias",
@@ -382,13 +458,13 @@ const languageContent = {
           icon: "⚡",
           title: "Consumption Optimization",
           description: "We teach you when to use more energy to pay less"
-        },
-        {
-          icon: "🏠",
-          title: "Provider Change",
-          description: "We help you find the best rate for your consumption"
         }
-      ]
+      ],
+      bottomCard: {
+        title: "Complete Personalized Analysis",
+        description: "Receive a detailed analysis with specific recommendations for your case",
+        cta: "Schedule Analysis"
+      }
     },
     chart: {
       title: "Cost Analysis and Savings",
@@ -456,6 +532,26 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
                 <SolutionDescription>{item.description}</SolutionDescription>
               </SolutionCard>
             ))}
+            
+            {/* Bottom Card - Full Width */}
+            <BottomCard>
+              <BottomCardContent>
+                <BottomCardLeft>
+                  <SolutionIcon>🎯</SolutionIcon>
+                  <div>
+                    <SolutionTitle style={{ textAlign: 'left', marginBottom: '8px' }}>
+                      {content.solution.bottomCard?.title || 'Análisis Personalizado Completo'}
+                    </SolutionTitle>
+                    <SolutionDescription style={{ textAlign: 'left' }}>
+                      {content.solution.bottomCard?.description || 'Recibe un análisis detallado con recomendaciones específicas para tu caso'}
+                    </SolutionDescription>
+                  </div>
+                </BottomCardLeft>
+                <BottomCardCTA onClick={handleMeetingCTA}>
+                  {content.solution.bottomCard?.cta || 'Agendar Análisis'}
+                </BottomCardCTA>
+              </BottomCardContent>
+            </BottomCard>
           </SolutionGrid>
         </SolutionSection>
 
