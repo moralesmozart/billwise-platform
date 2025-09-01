@@ -6,6 +6,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0.2-blue.svg)](https://www.typescriptlang.org/)
+[![Production Status](https://img.shields.io/badge/production-ready-🚀-brightgreen)](https://moralesmozart.github.io/billwise-platform/)
 
 ## 🎯 ¿Qué es BillWise?
 
