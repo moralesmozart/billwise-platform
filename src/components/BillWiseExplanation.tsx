@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ArrowLeft, Calendar, Users, TrendingDown, CheckCircle, Zap, Clock, Calculator, Target } from 'lucide-react';
+import { ArrowLeft, Calendar, Users, CheckCircle, Calculator, Target } from 'lucide-react';
 
 interface BillWiseExplanationProps {
   language: 'spanish' | 'portuguese' | 'english';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import BillWiseLanding from './components/BillWiseLanding';
 import BillWiseExplanation from './components/BillWiseExplanation';
@@ -8,7 +8,6 @@ import BillWiseExplanation from './components/BillWiseExplanation';
 const AppContent: React.FC = () => {
   const [currentLanguage, setCurrentLanguage] = useState<'spanish' | 'portuguese' | 'english' | null>(null);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleLanguageSelect = (language: 'spanish' | 'portuguese' | 'english') => {
     setCurrentLanguage(language);
