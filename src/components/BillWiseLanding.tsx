@@ -186,11 +186,13 @@ const FastTrackSection = styled.section`
   padding: 60px 20px;
   background: white;
   text-align: center;
+  width: 100%;
 `;
 
 const FastTrackContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
+  width: 100%;
 `;
 
 const FastTrackTitle = styled.h2`
@@ -200,7 +202,7 @@ const FastTrackTitle = styled.h2`
   margin-bottom: 24px;
 `;
 
-const FastTrackCTA = styled.button`
+const FastTrackCTA = styled.a`
   background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
   color: white;
   border: none;
@@ -210,16 +212,18 @@ const FastTrackCTA = styled.button`
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 12px;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
   
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+    color: white;
   }
 
   &::before {
@@ -599,7 +603,11 @@ const testimonials = [
   }
 ];
 
-const BillWiseLanding: React.FC = () => {
+interface BillWiseLandingProps {
+  onLanguageSelect: (language: 'spanish' | 'portuguese' | 'english') => void;
+}
+
+const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -631,17 +639,12 @@ const BillWiseLanding: React.FC = () => {
     alert('¡Gracias! Hemos recibido tu solicitud. Te contactaremos pronto.');
   };
 
-  const handleLanguageSelect = (language: string) => {
-    // Aquí puedes implementar la lógica para cambiar el idioma
-    console.log('Language selected:', language);
-    // Por ahora solo mostramos un alert
-    alert(`Idioma seleccionado: ${language}`);
+  const handleLanguageSelect = (language: 'spanish' | 'portuguese' | 'english') => {
+    onLanguageSelect(language);
   };
 
-  const handleFastTrack = () => {
-    // Implementar lógica para el fast track
-    alert('¡Perfecto! Te ayudaremos a conseguir ese descuento de 50€. Te contactaremos pronto.');
-  };
+  // Fast track now redirects directly to Octopus Energy
+  // No need for handleFastTrack function
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles.length === 0) return;
@@ -747,14 +750,14 @@ const BillWiseLanding: React.FC = () => {
 
       {/* Fast Track Section */}
       <FastTrackSection>
-        <FastTrackContainer>
-          <FastTrackTitle>¿No quieres aprender? Solo quieres 50€ de descuento</FastTrackTitle>
-          <FastTrackCTA onClick={handleFastTrack}>
-            <TrendingDown size={24} />
-            Cambiar al mejor proveedor ahora
-            <ArrowRight size={24} />
-          </FastTrackCTA>
-        </FastTrackContainer>
+                  <FastTrackContainer>
+            <FastTrackTitle>¿No tienes tiempo? Solo quieres 50-80€ de descuento</FastTrackTitle>
+            <FastTrackCTA href="https://share.octopusenergy.es/jolly-gull-677" target="_blank" rel="noopener noreferrer">
+              <TrendingDown size={24} />
+              Cambiar al mejor proveedor ahora
+              <ArrowRight size={24} />
+            </FastTrackCTA>
+          </FastTrackContainer>
       </FastTrackSection>
 
       {/* Testimonials Section */}
