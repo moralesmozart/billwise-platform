@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, Calendar } from 'lucide-react';
 
 interface Testimonial {
   flag: string;
@@ -170,6 +170,44 @@ const Dot = styled.button<{ active: boolean }>`
   }
 `;
 
+const CTAContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  padding: 0 20px;
+`;
+
+const CTAButton = styled.button`
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 14px 28px;
+    font-size: 0.9rem;
+  }
+`;
+
 const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonials }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   
@@ -269,6 +307,14 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
           />
         ))}
       </DotsContainer>
+      
+      {/* CTA Button */}
+      <CTAContainer>
+        <CTAButton onClick={() => window.open('https://calendly.com/your-link', '_blank')}>
+          <Calendar size={24} />
+          Schedule Free Meeting
+        </CTAButton>
+      </CTAContainer>
     </CarouselContainer>
   );
 };
