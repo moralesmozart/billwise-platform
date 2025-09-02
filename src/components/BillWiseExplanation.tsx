@@ -355,7 +355,7 @@ const languageContent = {
       bottomCard: {
         title: "Análisis Personalizado Completo",
         description: "Recibe un análisis detallado con recomendaciones específicas para tu caso",
-        cta: "Agendar Análisis"
+        cta: "Quiero entender mi factura ahora"
       }
     },
     chart: {
@@ -409,7 +409,7 @@ const languageContent = {
       bottomCard: {
         title: "Análise Personalizada Completa",
         description: "Receba uma análise detalhada com recomendações específicas para seu caso",
-        cta: "Agendar Análise"
+        cta: "Quero entender minha fatura agora"
       }
     },
     chart: {
@@ -463,7 +463,7 @@ const languageContent = {
       bottomCard: {
         title: "Complete Personalized Analysis",
         description: "Receive a detailed analysis with specific recommendations for your case",
-        cta: "Schedule Analysis"
+        cta: "I want to understand my bill now"
       }
     },
     chart: {
