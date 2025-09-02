@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ArrowLeft, Calendar, Users, CheckCircle, Calculator, Target } from 'lucide-react';
+import { ArrowLeft, Calendar, Users, CheckCircle, Target, TrendingUp, Zap, Shield, BarChart3 } from 'lucide-react';
 
 interface BillWiseExplanationProps {
   language: 'spanish' | 'portuguese' | 'english';
@@ -75,24 +75,52 @@ const SectionTitle = styled.h2`
   gap: 16px;
 `;
 
-const ProblemList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
+const ProblemGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
 `;
 
-const ProblemItem = styled.li`
+const ProblemCard = styled.div`
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+`;
+
+const ProblemCardIcon = styled.div`
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
   margin-bottom: 16px;
-  font-size: 1.1rem;
+  color: white;
+  font-size: 1.5rem;
+`;
+
+const ProblemCardTitle = styled.h3`
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: white;
+`;
+
+const ProblemCardDescription = styled.p`
+  font-size: 1rem;
   line-height: 1.6;
-  
-  &:before {
-    content: '❌';
-    font-size: 1.2rem;
-  }
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
 `;
 
 const SolutionSection = styled.section`
@@ -224,48 +252,7 @@ const SolutionDescription = styled.p`
   opacity: 0.9;
 `;
 
-const ChartSection = styled.section`
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 40px;
-  margin-bottom: 40px;
-  backdrop-filter: blur(10px);
-`;
 
-const ChartContainer = styled.div`
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
-  margin-top: 2rem;
-  color: #2C3E50;
-`;
-
-const ChartTitle = styled.h3`
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-align: center;
-  color: #2C3E50;
-`;
-
-const ChartDescription = styled.p`
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #5D6D7E;
-`;
-
-const ChartImage = styled.div`
-  width: 100%;
-  height: 300px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  color: #6c757d;
-  border: 2px dashed #dee2e6;
-`;
 
 const MeetingSection = styled.section`
   background: rgba(255, 255, 255, 0.1);
@@ -274,6 +261,55 @@ const MeetingSection = styled.section`
   margin-bottom: 40px;
   backdrop-filter: blur(10px);
   text-align: center;
+`;
+
+const MeetingGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin: 32px 0;
+`;
+
+const MeetingCard = styled.div`
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  text-align: center;
+  
+  &:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+`;
+
+const MeetingCardIcon = styled.div`
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #28A745 0%, #20C997 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: white;
+  font-size: 1.8rem;
+`;
+
+const MeetingCardTitle = styled.h3`
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: white;
+`;
+
+const MeetingCardDescription = styled.p`
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
 `;
 
 const MeetingCTA = styled.button`
@@ -289,33 +325,11 @@ const MeetingCTA = styled.button`
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  margin-top: 2rem;
+  margin-top: 24px;
   
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 35px rgba(40, 167, 69, 0.4);
-  }
-`;
-
-const BenefitsList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 2rem 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-`;
-
-const BenefitItem = styled.li`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  
-  &:before {
-    content: '✅';
-    font-size: 1.2rem;
   }
 `;
 
@@ -511,11 +525,27 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
             <Target size={32} />
             {content.problem.title}
           </SectionTitle>
-          <ProblemList>
+          <ProblemGrid>
             {content.problem.items.map((item, index) => (
-              <ProblemItem key={index}>{item}</ProblemItem>
+              <ProblemCard key={index}>
+                <ProblemCardIcon>
+                  {index === 0 && <BarChart3 size={24} />}
+                  {index === 1 && <TrendingUp size={24} />}
+                  {index === 2 && <Zap size={24} />}
+                  {index === 3 && <Shield size={24} />}
+                  {index === 4 && <Target size={24} />}
+                </ProblemCardIcon>
+                <ProblemCardTitle>
+                  {index === 0 && 'Confusión en Terminología'}
+                  {index === 1 && 'Costos Inesperados'}
+                  {index === 2 && 'Oportunidades Perdidas'}
+                  {index === 3 && 'Tarifas Desconocidas'}
+                  {index === 4 && 'Conceptos Incomprensibles'}
+                </ProblemCardTitle>
+                <ProblemCardDescription>{item}</ProblemCardDescription>
+              </ProblemCard>
             ))}
-          </ProblemList>
+          </ProblemGrid>
         </ProblemSection>
 
         {/* Solution Section */}
@@ -555,24 +585,7 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
           </SolutionGrid>
         </SolutionSection>
 
-        {/* Chart Section */}
-        <ChartSection>
-          <SectionTitle>
-            <Calculator size={32} />
-            {content.chart.title}
-          </SectionTitle>
-          <ChartContainer>
-            <ChartTitle>Análisis de Factura y Ahorros</ChartTitle>
-            <ChartDescription>
-              {content.chart.description}
-            </ChartDescription>
-            <ChartImage>
-              📊 Gráfico de análisis de costos y ahorros potenciales
-              <br />
-              (Similar al mostrado en la imagen de referencia)
-            </ChartImage>
-          </ChartContainer>
-        </ChartSection>
+
 
         {/* Meeting Section */}
         <MeetingSection>
@@ -583,11 +596,27 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
           <p style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>
             {content.meeting.description}
           </p>
-          <BenefitsList>
+          <MeetingGrid>
             {content.meeting.benefits.map((benefit, index) => (
-              <BenefitItem key={index}>{benefit}</BenefitItem>
+              <MeetingCard key={index}>
+                <MeetingCardIcon>
+                  {index === 0 && <BarChart3 size={24} />}
+                  {index === 1 && <TrendingUp size={24} />}
+                  {index === 2 && <Zap size={24} />}
+                  {index === 3 && <Shield size={24} />}
+                  {index === 4 && <Target size={24} />}
+                </MeetingCardIcon>
+                <MeetingCardTitle>
+                  {index === 0 && 'Análisis Completo'}
+                  {index === 1 && 'Planilla Detallada'}
+                  {index === 2 && 'Opciones de Optimización'}
+                  {index === 3 && 'Cálculo de Ahorros'}
+                  {index === 4 && 'Recomendaciones Específicas'}
+                </MeetingCardTitle>
+                <MeetingCardDescription>{benefit}</MeetingCardDescription>
+              </MeetingCard>
             ))}
-          </BenefitsList>
+          </MeetingGrid>
           <MeetingCTA onClick={handleMeetingCTA}>
             <Calendar size={24} />
             {content.meeting.cta}
