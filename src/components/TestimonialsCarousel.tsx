@@ -145,30 +145,7 @@ const NavButton = styled.button<{ disabled?: boolean; position: 'left' | 'right'
   }
 `;
 
-const DotsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 20px;
-  
-  @media (max-width: 768px) {
-    margin-top: 30px;
-  }
-`;
 
-const Dot = styled.button<{ active: boolean }>`
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: none;
-  background: ${props => props.active ? '#667eea' : 'rgba(255, 255, 255, 0.3)'};
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background: ${props => props.active ? '#5a6fd8' : 'rgba(255, 255, 255, 0.5)'};
-  }
-`;
 
 const CTAContainer = styled.div`
   display: flex;
@@ -223,9 +200,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
     setCurrentIndex(prev => (prev - 1 + totalSlides) % totalSlides);
   };
   
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
+
   
   const renderTestimonials = () => {
     if (isMobile) {
@@ -297,16 +272,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
         </NavButton>
       </NavigationContainer>
       
-      {/* Dots */}
-      <DotsContainer>
-        {Array.from({ length: totalSlides }, (_, index) => (
-          <Dot
-            key={index}
-            active={index === currentIndex}
-            onClick={() => goToSlide(index)}
-          />
-        ))}
-      </DotsContainer>
+
       
       {/* CTA Button */}
       <CTAContainer>

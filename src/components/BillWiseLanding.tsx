@@ -266,7 +266,7 @@ const TestimonialsTitle = styled.h2`
 
 
 
-// Testimonials data - 6 examples as requested
+// Testimonials data - 9 examples including new ones
 const testimonials = [
   {
     flag: "🇵🇱",
@@ -303,6 +303,24 @@ const testimonials = [
     origin: "UK",
     content: "British colleague discovered hidden fees and saved 350€/year.",
     savings: "350€/año"
+  },
+  {
+    flag: "🇦🇷",
+    origin: "Argentina",
+    content: "Now it's much easier to understand my bills! Loved the 50€ discount on my next bill after the changes.",
+    savings: "50€ descuento"
+  },
+  {
+    flag: "🇪🇸",
+    origin: "España",
+    content: "Finally I understand my electricity bill! The 50€ discount on my next bill was amazing after the changes.",
+    savings: "50€ descuento"
+  },
+  {
+    flag: "🇧🇷",
+    origin: "Brasil",
+    content: "Everything is so clear now! Got a 50€ discount on my next bill after implementing the recommendations.",
+    savings: "50€ descuento"
   }
 ];
 
