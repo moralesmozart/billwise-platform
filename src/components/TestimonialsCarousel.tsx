@@ -310,7 +310,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
       
       {/* CTA Button */}
       <CTAContainer>
-        <CTAButton onClick={() => window.open('https://calendly.com/your-link', '_blank')}>
+        <CTAButton onClick={() => window.open('https://wa.me/+34671310850', '_blank')}>
           <Calendar size={24} />
           Schedule Free Meeting
         </CTAButton>

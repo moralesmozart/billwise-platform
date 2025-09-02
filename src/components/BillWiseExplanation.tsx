@@ -489,8 +489,8 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
   const content = languageContent[language];
 
   const handleMeetingCTA = () => {
-    // Aquí puedes implementar la lógica para agendar la reunión
-    alert(`¡Perfecto! Te contactaremos pronto para agendar tu reunión personalizada en ${language === 'spanish' ? 'español' : language === 'portuguese' ? 'portugués' : 'inglés'}.`);
+    // Redirect to WhatsApp for scheduling
+    window.open('https://wa.me/+34671310850', '_blank');
   };
 
   return (

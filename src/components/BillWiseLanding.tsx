@@ -310,9 +310,10 @@ interface BillWiseLandingProps {
   onLanguageSelect: (language: 'spanish' | 'portuguese' | 'english') => void;
 }
 
-const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect }) => {
-  const handleLanguageSelect = (language: 'spanish' | 'portuguese' | 'english') => {
-    onLanguageSelect(language);
+const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect: _ }) => {
+  const handleLanguageSelect = (_language: 'spanish' | 'portuguese' | 'english') => {
+    // Redirect to WhatsApp instead of explanation page
+    window.open('https://wa.me/+34671310850', '_blank');
   };
 
   return (
