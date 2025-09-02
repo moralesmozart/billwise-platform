@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ChevronLeft, ChevronRight, Star, CheckCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react';
 
 interface Testimonial {
   flag: string;
@@ -19,92 +19,10 @@ const CarouselContainer = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 40px;
-  align-items: start;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-`;
-
-// Left Column - Overall Rating
-const RatingColumn = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 30px;
-  text-align: center;
-  color: white;
-  backdrop-filter: blur(10px);
-  
-  @media (max-width: 768px) {
-    padding: 20px;
-  }
-`;
-
-const RatingTitle = styled.h3`
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 16px;
-  color: white;
-`;
-
-const StarRating = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  margin-bottom: 16px;
-`;
-
-const StarIcon = styled(Star)`
-  color: #28A745;
-  fill: #28A745;
-  width: 24px;
-  height: 24px;
-`;
-
-const ReviewCount = styled.p`
-  font-size: 1rem;
-  margin-bottom: 20px;
-  opacity: 0.9;
-`;
-
-const TrustedBadge = styled.div`
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-bottom: 20px;
-  
-  p {
-    color: #667eea;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin: 0;
-  }
-`;
-
-const TrustpilotLogo = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  
-  .star {
-    color: #28A745;
-  }
-`;
-
-// Right Column - Testimonials
-const TestimonialsColumn = styled.div`
-  position: relative;
   overflow: hidden;
 `;
 
-const TestimonialsTrack = styled.div<{ currentIndex: number }>`
+const CarouselTrack = styled.div<{ currentIndex: number }>`
   display: flex;
   transition: transform 0.5s ease-in-out;
   transform: translateX(-${props => props.currentIndex * 100}%);
@@ -115,7 +33,7 @@ const TestimonialsTrack = styled.div<{ currentIndex: number }>`
   }
 `;
 
-const TestimonialsSlide = styled.div`
+const CarouselSlide = styled.div`
   width: 50%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -275,7 +193,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
     if (isMobile) {
       // Mobile: show 1 testimonial per slide
       return testimonials.map((testimonial, index) => (
-        <TestimonialsSlide key={index}>
+        <CarouselSlide key={index}>
           <TestimonialCard>
             <TestimonialHeader>
               <TestimonialFlag>{testimonial.flag}</TestimonialFlag>
@@ -287,7 +205,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
               {testimonial.savings}
             </TestimonialSavings>
           </TestimonialCard>
-        </TestimonialsSlide>
+        </CarouselSlide>
       ));
     } else {
       // Desktop: show 3 testimonials per slide
@@ -295,7 +213,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
       for (let i = 0; i < testimonials.length; i += 3) {
         const slideTestimonials = testimonials.slice(i, i + 3);
         slides.push(
-          <TestimonialsSlide key={i}>
+          <CarouselSlide key={i}>
             {slideTestimonials.map((testimonial, index) => (
               <TestimonialCard key={index}>
                 <TestimonialHeader>
@@ -309,7 +227,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
                 </TestimonialSavings>
               </TestimonialCard>
             ))}
-          </TestimonialsSlide>
+          </CarouselSlide>
         );
       }
       return slides;
@@ -318,60 +236,39 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
   
   return (
     <CarouselContainer>
-      {/* Left Column - Rating */}
-      <RatingColumn>
-        <RatingTitle>Excelente</RatingTitle>
-        <StarRating>
-          {[...Array(5)].map((_, i) => (
-            <StarIcon key={i} />
-          ))}
-        </StarRating>
-        <ReviewCount>Basado en 6,680 reseñas</ReviewCount>
-        <TrustedBadge>
-          <p>El proveedor de energía más confiable de España</p>
-        </TrustedBadge>
-        <TrustpilotLogo>
-          <span className="star">★</span>
-          Trustpilot
-        </TrustpilotLogo>
-      </RatingColumn>
+      <CarouselTrack currentIndex={currentIndex}>
+        {renderTestimonials()}
+      </CarouselTrack>
       
-      {/* Right Column - Testimonials */}
-      <TestimonialsColumn>
-        <TestimonialsTrack currentIndex={currentIndex}>
-          {renderTestimonials()}
-        </TestimonialsTrack>
+      {/* Navigation */}
+      <NavigationContainer>
+        <NavButton 
+          onClick={prevSlide} 
+          disabled={currentIndex === 0}
+          position="left"
+        >
+          <ChevronLeft size={20} />
+        </NavButton>
         
-        {/* Navigation */}
-        <NavigationContainer>
-          <NavButton 
-            onClick={prevSlide} 
-            disabled={currentIndex === 0}
-            position="left"
-          >
-            <ChevronLeft size={20} />
-          </NavButton>
-          
-          <NavButton 
-            onClick={nextSlide} 
-            disabled={currentIndex === totalSlides - 1}
-            position="right"
-          >
-            <ChevronRight size={20} />
-          </NavButton>
-        </NavigationContainer>
-        
-        {/* Dots */}
-        <DotsContainer>
-          {Array.from({ length: totalSlides }, (_, index) => (
-            <Dot
-              key={index}
-              active={index === currentIndex}
-              onClick={() => goToSlide(index)}
-            />
-          ))}
-        </DotsContainer>
-      </TestimonialsColumn>
+        <NavButton 
+          onClick={nextSlide} 
+          disabled={currentIndex === totalSlides - 1}
+          position="right"
+        >
+          <ChevronRight size={20} />
+        </NavButton>
+      </NavigationContainer>
+      
+      {/* Dots */}
+      <DotsContainer>
+        {Array.from({ length: totalSlides }, (_, index) => (
+          <Dot
+            key={index}
+            active={index === currentIndex}
+            onClick={() => goToSlide(index)}
+          />
+        ))}
+      </DotsContainer>
     </CarouselContainer>
   );
 };
