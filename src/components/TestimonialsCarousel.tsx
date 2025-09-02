@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { ChevronLeft, ChevronRight, CheckCircle, Calendar } from 'lucide-react';
+import { CheckCircle, Calendar } from 'lucide-react';
 
 interface Testimonial {
   flag: string;
@@ -14,35 +14,17 @@ interface TestimonialsCarouselProps {
 }
 
 // Styled Components
-const CarouselContainer = styled.div`
-  position: relative;
+const TestimonialsGrid = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  overflow: hidden;
-`;
-
-const CarouselTrack = styled.div<{ currentIndex: number }>`
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-  transform: translateX(-${props => props.currentIndex * 100}%);
-  width: 200%;
-  
-  @media (max-width: 768px) {
-    width: 400%;
-  }
-`;
-
-const CarouselSlide = styled.div`
-  width: 50%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 24px;
   
   @media (max-width: 768px) {
-    width: 25%;
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 20px;
   }
 `;
 
@@ -98,52 +80,7 @@ const TestimonialSavings = styled.div`
   font-size: 0.8rem;
 `;
 
-// Navigation
-const NavigationContainer = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  pointer-events: none;
-  
-  @media (max-width: 768px) {
-    top: auto;
-    bottom: -40px;
-    transform: none;
-    pointer-events: all;
-  }
-`;
 
-const NavButton = styled.button<{ disabled?: boolean; position: 'left' | 'right' }>`
-  background: ${props => props.disabled ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.9)'};
-  color: ${props => props.disabled ? 'rgba(255, 255, 255, 0.5)' : '#667eea'};
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
-  transition: all 0.3s ease;
-  pointer-events: all;
-  
-  &:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 1);
-    transform: scale(1.1);
-  }
-  
-  &:disabled {
-    opacity: 0.5;
-  }
-  
-  @media (max-width: 768px) {
-    position: ${props => props.position === 'left' ? 'static' : 'static'};
-    transform: none;
-  }
-`;
 
 
 
@@ -186,28 +123,11 @@ const CTAButton = styled.button`
 `;
 
 const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonials }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  
-  // Calculate total slides based on screen size
-  const isMobile = window.innerWidth <= 768;
-  const totalSlides = isMobile ? testimonials.length : Math.ceil(testimonials.length / 3);
-  
-  const nextSlide = () => {
-    setCurrentIndex(prev => (prev + 1) % totalSlides);
-  };
-  
-  const prevSlide = () => {
-    setCurrentIndex(prev => (prev - 1 + totalSlides) % totalSlides);
-  };
-  
-
-  
-  const renderTestimonials = () => {
-    if (isMobile) {
-      // Mobile: show 1 testimonial per slide
-      return testimonials.map((testimonial, index) => (
-        <CarouselSlide key={index}>
-          <TestimonialCard>
+  return (
+    <>
+      <TestimonialsGrid>
+        {testimonials.map((testimonial, index) => (
+          <TestimonialCard key={index}>
             <TestimonialHeader>
               <TestimonialFlag>{testimonial.flag}</TestimonialFlag>
               <TestimonialOrigin>{testimonial.origin}</TestimonialOrigin>
@@ -218,61 +138,8 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
               {testimonial.savings}
             </TestimonialSavings>
           </TestimonialCard>
-        </CarouselSlide>
-      ));
-    } else {
-      // Desktop: show 3 testimonials per slide
-      const slides = [];
-      for (let i = 0; i < testimonials.length; i += 3) {
-        const slideTestimonials = testimonials.slice(i, i + 3);
-        slides.push(
-          <CarouselSlide key={i}>
-            {slideTestimonials.map((testimonial, index) => (
-              <TestimonialCard key={index}>
-                <TestimonialHeader>
-                  <TestimonialFlag>{testimonial.flag}</TestimonialFlag>
-                  <TestimonialOrigin>{testimonial.origin}</TestimonialOrigin>
-                </TestimonialHeader>
-                <TestimonialContent>{testimonial.content}</TestimonialContent>
-                <TestimonialSavings>
-                  <CheckCircle size={14} />
-                  {testimonial.savings}
-                </TestimonialSavings>
-              </TestimonialCard>
-            ))}
-          </CarouselSlide>
-        );
-      }
-      return slides;
-    }
-  };
-  
-  return (
-    <CarouselContainer>
-      <CarouselTrack currentIndex={currentIndex}>
-        {renderTestimonials()}
-      </CarouselTrack>
-      
-      {/* Navigation */}
-      <NavigationContainer>
-        <NavButton 
-          onClick={prevSlide} 
-          disabled={currentIndex === 0}
-          position="left"
-        >
-          <ChevronLeft size={20} />
-        </NavButton>
-        
-        <NavButton 
-          onClick={nextSlide} 
-          disabled={currentIndex === totalSlides - 1}
-          position="right"
-        >
-          <ChevronRight size={20} />
-        </NavButton>
-      </NavigationContainer>
-      
-
+        ))}
+      </TestimonialsGrid>
       
       {/* CTA Button */}
       <CTAContainer>
@@ -281,7 +148,7 @@ const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({ testimonial
           Schedule Free Meeting
         </CTAButton>
       </CTAContainer>
-    </CarouselContainer>
+    </>
   );
 };
 
