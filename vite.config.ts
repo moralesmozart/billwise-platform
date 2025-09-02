@@ -7,30 +7,36 @@ export default defineConfig({
   base: '/billwise-platform/',
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: false, // Disable sourcemaps for production
     rollupOptions: {
       output: {
-        // Ensure proper MIME types for GitHub Pages
-        assetFileNames: (assetInfo) => {
-          const info = assetInfo.name.split('.')
-          const ext = info[info.length - 1]
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext)) {
-            return `assets/images/[name]-[hash][extname]`
-          }
-          if (/css/i.test(ext)) {
-            return `assets/css/[name]-[hash][extname]`
-          }
-          return `assets/[name]-[hash][extname]`
-        },
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js'
+        // Simplified asset naming for better MIME type handling
+        assetFileNames: 'assets/[name][extname]',
+        chunkFileNames: 'assets/[name].js',
+        entryFileNames: 'assets/[name].js',
+        // Ensure proper module format
+        format: 'es',
+        // Manual chunk splitting for better caching
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom']
+        }
       }
     },
-    // Use ES2020 target for modern features but GitHub Pages compatibility
-    target: 'es2020'
+    // Target ES2020 for modern browsers
+    target: 'es2020',
+    // Ensure proper minification
+    minify: 'esbuild'
   },
-  // Optimize for GitHub Pages
+  // Optimize dependencies
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom']
+  },
+  // Server configuration for development
+  server: {
+    headers: {
+      'Cross-Origin-Embedder-Policy': 'unsafe-none',
+      'Cross-Origin-Opener-Policy': 'unsafe-none'
+    }
   }
 })

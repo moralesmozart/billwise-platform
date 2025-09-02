@@ -1,0 +1,33 @@
+# Force correct MIME types for all JavaScript files
+/*.js
+  Content-Type: application/javascript; charset=utf-8
+  X-Content-Type-Options: nosniff
+
+# Force correct MIME types for all CSS files
+/*.css
+  Content-Type: text/css; charset=utf-8
+  X-Content-Type-Options: nosniff
+
+# Force correct MIME types for HTML files
+/*.html
+  Content-Type: text/html; charset=utf-8
+
+# Force correct MIME types for SVG files
+/*.svg
+  Content-Type: image/svg+xml; charset=utf-8
+
+# CORS headers for all files
+/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, X-Requested-With
+
+# Security headers for all files
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Cache control for static assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

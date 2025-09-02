@@ -3,19 +3,37 @@
     AddType application/javascript .js
     AddType text/css .css
     AddType image/svg+xml .svg
+    AddType text/html .html
 </IfModule>
 
 # Force JavaScript files to be served with correct MIME type
 <FilesMatch "\.js$">
-    Header set Content-Type "application/javascript"
+    Header set Content-Type "application/javascript; charset=utf-8"
+    Header set X-Content-Type-Options "nosniff"
 </FilesMatch>
 
 # Force CSS files to be served with correct MIME type
 <FilesMatch "\.css$">
-    Header set Content-Type "text/css"
+    Header set Content-Type "text/css; charset=utf-8"
+    Header set X-Content-Type-Options "nosniff"
+</FilesMatch>
+
+# Force HTML files to be served with correct MIME type
+<FilesMatch "\.html$">
+    Header set Content-Type "text/html; charset=utf-8"
 </FilesMatch>
 
 # Enable CORS for GitHub Pages
 Header always set Access-Control-Allow-Origin "*"
 Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
-Header always set Access-Control-Allow-Headers "Content-Type"
+Header always set Access-Control-Allow-Headers "Content-Type, X-Requested-With"
+
+# Security headers
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set X-XSS-Protection "1; mode=block"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Cache control for static assets
+<FilesMatch "\.(js|css|svg|png|jpg|jpeg|gif|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
