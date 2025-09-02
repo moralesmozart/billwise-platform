@@ -26,8 +26,8 @@ export default defineConfig({
         entryFileNames: 'assets/js/[name]-[hash].js'
       }
     },
-    // Ensure proper module format for GitHub Pages
-    target: 'es2015'
+    // Use ES2020 target for modern features but GitHub Pages compatibility
+    target: 'es2020'
   },
   // Optimize for GitHub Pages
   optimizeDeps: {
