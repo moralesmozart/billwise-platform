@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ArrowLeft, Users, CheckCircle, Target, TrendingUp, Zap, Shield, BarChart3 } from 'lucide-react';
+import { ArrowLeft, Users, CheckCircle, Target, TrendingUp, Zap, Shield, BarChart3, TrendingDown, ArrowRight } from 'lucide-react';
 
 interface BillWiseExplanationProps {
   language: 'spanish' | 'portuguese' | 'english';
@@ -108,6 +108,7 @@ const ProblemCard = styled.div<{ index: number }>`
   background: rgba(255, 255, 255, 0.15);
   border-radius: 16px;
   padding: 24px;
+  text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
   animation: fadeInUp 0.6s ease ${props => 0.4 + props.index * 0.1}s both;
@@ -304,6 +305,51 @@ const MeetingCardDescription = styled.p`
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.9);
   margin: 0;
+`;
+
+// Investment Section
+const InvestmentSection = styled.section`
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  margin-top: 40px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  animation: fadeInUp 0.8s ease 1.2s both;
+`;
+
+const InvestmentContainer = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+`;
+
+const InvestmentTitle = styled.h2`
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: white;
+  animation: fadeInUp 0.8s ease 1.2s both;
+`;
+
+const InvestmentCTA = styled.button`
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
 `;
 
 // Language-specific content
@@ -622,6 +668,24 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
             ))}
           </MeetingGrid>
         </MeetingSection>
+
+        {/* Investment Section */}
+        <InvestmentSection>
+          <InvestmentContainer>
+            <InvestmentTitle>
+              {language === 'spanish' && 'Inversión de 15€ para aprender todo'}
+              {language === 'portuguese' && 'Investimento de 15€ para aprender tudo'}
+              {language === 'english' && 'Investment of 15€ to learn everything'}
+            </InvestmentTitle>
+            <InvestmentCTA onClick={() => window.open('https://wa.me/+34671310850', '_blank')}>
+              <TrendingDown size={24} />
+              {language === 'spanish' && 'Agendar reunión'}
+              {language === 'portuguese' && 'Agendar reunião'}
+              {language === 'english' && 'Schedule meeting'}
+              <ArrowRight size={24} />
+            </InvestmentCTA>
+          </InvestmentContainer>
+        </InvestmentSection>
       </Content>
     </ExplanationContainer>
   );
