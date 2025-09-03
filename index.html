@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="icon" type="image/png" href="./favicon.png" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="BillWise - Entiende tus facturas de electricidad y agua en España. Ahorra dinero con nuestro análisis personalizado. Análisis gratuito en 15-30 minutos." />
+    <meta name="keywords" content="facturas, electricidad, agua, ahorro, energía, España, análisis, valle, punta, llano, optimización, consumo" />
+    <meta name="author" content="BillWise" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="BillWise" />
+    <meta name="msapplication-TileColor" content="#667eea" />
+    <meta name="msapplication-config" content="./browserconfig.xml" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://moralesmozart.github.io/billwise-platform/" />
+    <meta property="og:title" content="BillWise - Entiende tus facturas de electricidad y agua en España" />
+    <meta property="og:description" content="¿No sabes qué significa 'valle, punta, llano'? Te ayudamos a entender tus facturas y ahorrar dinero. Análisis personalizado gratuito en 15-30 minutos." />
+    <meta property="og:image" content="https://moralesmozart.github.io/billwise-platform/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="BillWise" />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://moralesmozart.github.io/billwise-platform/" />
+    <meta property="twitter:title" content="BillWise - Entiende tus facturas de electricidad y agua en España" />
+    <meta property="twitter:description" content="¿No sabes qué significa 'valle, punta, llano'? Te ayudamos a entender tus facturas y ahorrar dinero. Análisis personalizado gratuito en 15-30 minutos." />
+    <meta property="twitter:image" content="https://moralesmozart.github.io/billwise-platform/og-image.svg" />
+    <meta property="twitter:creator" content="@billwise" />
+    
+    <!-- WhatsApp specific -->
+    <meta property="og:image:alt" content="BillWise - Entiende tus facturas de electricidad y agua. Análisis personalizado gratuito." />
+    
+    <title>BillWise - Entiende tus facturas de electricidad y agua en España</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="data:application/octet-stream;base64,aW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JwppbXBvcnQgUmVhY3RET00gZnJvbSAncmVhY3QtZG9tL2NsaWVudCcKaW1wb3J0IEFwcCBmcm9tICcuL0FwcC50c3gnCmltcG9ydCAnLi9pbmRleC5jc3MnCgovLyBTZXJ2aWNlIFdvcmtlciBSZWdpc3RyYXRpb24KaWYgKCdzZXJ2aWNlV29ya2VyJyBpbiBuYXZpZ2F0b3IpIHsKICB3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignbG9hZCcsICgpID0+IHsKICAgIG5hdmlnYXRvci5zZXJ2aWNlV29ya2VyLnJlZ2lzdGVyKCcvc3cuanMnKQogICAgICAudGhlbigocmVnaXN0cmF0aW9uKSA9PiB7CiAgICAgICAgY29uc29sZS5sb2coJ1NXIHJlZ2lzdGVyZWQ6ICcsIHJlZ2lzdHJhdGlvbik7CiAgICAgIH0pCiAgICAgIC5jYXRjaCgocmVnaXN0cmF0aW9uRXJyb3IpID0+IHsKICAgICAgICBjb25zb2xlLmxvZygnU1cgcmVnaXN0cmF0aW9uIGZhaWxlZDogJywgcmVnaXN0cmF0aW9uRXJyb3IpOwogICAgICB9KTsKICB9KTsKfQoKLy8gUFdBIEluc3RhbGwgUHJvbXB0Ci8vIE5vdGU6IFBXQSBpbnN0YWxsIGZ1bmN0aW9uYWxpdHkgaXMgaGFuZGxlZCBpbiBpbmRleC5odG1sCgpSZWFjdERPTS5jcmVhdGVSb290KGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyb290JykhKS5yZW5kZXIoCiAgPFJlYWN0LlN0cmljdE1vZGU+CiAgICA8QXBwIC8+CiAgPC9SZWFjdC5TdHJpY3RNb2RlPiwKKQo=" as="script" />
+    <link rel="dns-prefetch" href="//wa.me" />
+    
+    <!-- React dependencies are bundled with Vite for better compatibility -->
+    <script type="module" crossorigin src="/billwise-platform/assets/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/billwise-platform/assets/vendor.js">
+    <link rel="modulepreload" crossorigin href="/billwise-platform/assets/router.js">
+    <link rel="stylesheet" href="/billwise-platform/assets/index.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    
+    <!-- PWA Install Prompt -->
+    <script>
+      // PWA install prompt
+      let deferredPrompt;
+      
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        // Show custom install button
+        const installButton = document.createElement('button');
+        installButton.textContent = 'Instalar App';
+        installButton.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #28A745;
+          color: white;
+          border: none;
+          padding: 12px 20px;
+          border-radius: 25px;
+          cursor: pointer;
+          z-index: 10000;
+          font-weight: 600;
+        `;
+        
+        installButton.addEventListener('click', () => {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('User accepted the install prompt');
+            } else {
+              console.log('User dismissed the install prompt');
+            }
+            deferredPrompt = null;
+            installButton.remove();
+          });
+        });
+        
+        document.body.appendChild(installButton);
+        
+        // Auto-hide after 10 seconds
+        setTimeout(() => {
+          if (installButton.parentNode) {
+            installButton.remove();
+          }
+        }, 10000);
+      });
+    </script>
+  </body>
+</html>
