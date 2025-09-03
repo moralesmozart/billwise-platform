@@ -510,6 +510,18 @@ const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect }) =
         </TestimonialsContainer>
       </TestimonialsSection>
 
+      {/* Investment Section */}
+      <FastTrackSection>
+        <FastTrackContainer>
+          <FastTrackTitle>Investment of 15 euros to learn everything</FastTrackTitle>
+          <FastTrackCTA onClick={() => window.open('https://wa.me/+34671310850', '_blank')}>
+            <TrendingDown size={24} />
+            Schedule meeting
+            <ArrowRight size={24} />
+          </FastTrackCTA>
+        </FastTrackContainer>
+      </FastTrackSection>
+
       {/* Floating Action Button */}
       <FloatingActionButton isVisible={showFAB} onClick={handleFABClick}>
         <MessageCircle size={24} />

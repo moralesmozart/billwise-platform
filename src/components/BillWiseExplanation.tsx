@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { ArrowLeft, Users, CheckCircle, Target, TrendingUp, Zap, Shield, BarChart3, Star } from 'lucide-react';
+import { ArrowLeft, Users, CheckCircle, Target, TrendingUp, Zap, Shield, BarChart3 } from 'lucide-react';
 
 interface BillWiseExplanationProps {
   language: 'spanish' | 'portuguese' | 'english';
@@ -48,31 +48,6 @@ const BackButton = styled.button`
     background: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
   }
-`;
-
-const ProgressBar = styled.div`
-  flex: 1;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-  overflow: hidden;
-  margin: 0 20px;
-`;
-
-const ProgressFill = styled.div<{ progress: number }>`
-  height: 100%;
-  background: linear-gradient(90deg, #28A745, #20C997);
-  border-radius: 3px;
-  transition: width 0.5s ease;
-  width: ${props => props.progress}%;
-`;
-
-const ProgressText = styled.span`
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 600;
-  min-width: 60px;
-  text-align: center;
 `;
 
 const Content = styled.div`
@@ -331,43 +306,6 @@ const MeetingCardDescription = styled.p`
   margin: 0;
 `;
 
-// Stats Section
-const StatsSection = styled.section`
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 40px;
-  margin-bottom: 40px;
-  backdrop-filter: blur(10px);
-  text-align: center;
-  animation: fadeInUp 0.8s ease 1.4s both;
-`;
-
-const StatsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-  margin-top: 32px;
-`;
-
-const StatCard = styled.div`
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
-  padding: 24px;
-  text-align: center;
-`;
-
-const StatNumber = styled.div`
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #FFD700;
-  margin-bottom: 8px;
-`;
-
-const StatLabel = styled.div`
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.9);
-`;
-
 // Language-specific content
 const languageContent = {
   spanish: {
@@ -535,21 +473,7 @@ const languageContent = {
 };
 
 const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onBack }) => {
-  const [progress, setProgress] = useState(0);
   const content = languageContent[language];
-
-  useEffect(() => {
-    // Simulate progress as user scrolls
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollTop / docHeight) * 100;
-      setProgress(Math.min(scrollPercent, 100));
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <ExplanationContainer>
@@ -558,12 +482,6 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
           <ArrowLeft size={20} />
           Volver
         </BackButton>
-        
-        <ProgressBar>
-          <ProgressFill progress={progress} />
-        </ProgressBar>
-        
-        <ProgressText>{Math.round(progress)}%</ProgressText>
       </Header>
 
       <Content>
@@ -631,32 +549,6 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
             </BottomCard>
           </SolutionGrid>
         </SolutionSection>
-
-        {/* Stats Section */}
-        <StatsSection>
-          <SectionTitle>
-            <Star size={32} />
-            Nuestros Resultados
-          </SectionTitle>
-          <StatsGrid>
-            <StatCard>
-              <StatNumber>85%</StatNumber>
-              <StatLabel>Clientes que no entienden sus facturas</StatLabel>
-            </StatCard>
-            <StatCard>
-              <StatNumber>50-80€</StatNumber>
-              <StatLabel>Ahorro mensual promedio</StatLabel>
-            </StatCard>
-            <StatCard>
-              <StatNumber>15-30</StatNumber>
-              <StatLabel>Minutos de análisis gratuito</StatLabel>
-            </StatCard>
-            <StatCard>
-              <StatNumber>100%</StatNumber>
-              <StatLabel>Gratis y sin compromiso</StatLabel>
-            </StatCard>
-          </StatsGrid>
-        </StatsSection>
 
         {/* Meeting Section */}
         <MeetingSection>
