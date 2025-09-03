@@ -321,6 +321,9 @@ const InvestmentSection = styled.section`
 const InvestmentContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const InvestmentTitle = styled.h2`
@@ -345,6 +348,7 @@ const InvestmentCTA = styled.button`
   font-weight: 600;
   transition: all 0.3s ease;
   font-size: 1.2rem;
+  margin: 0 auto;
   
   &:hover {
     background: rgba(255, 255, 255, 0.3);
