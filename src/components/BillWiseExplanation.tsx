@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ArrowLeft, Calendar, Users, CheckCircle, Target, TrendingUp, Zap, Shield, BarChart3, Star } from 'lucide-react';
+import { ArrowLeft, Users, CheckCircle, Target, TrendingUp, Zap, Shield, BarChart3, Star } from 'lucide-react';
 
 interface BillWiseExplanationProps {
   language: 'spanish' | 'portuguese' | 'english';
@@ -201,30 +201,18 @@ const SolutionGrid = styled.div`
 // Bottom Card - Takes full width
 const BottomCard = styled.div`
   grid-column: 1 / -1;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
-  padding: 30px;
-  text-align: center;
-  transition: all 0.3s ease;
-  width: 100%;
-  animation: fadeInUp 0.8s ease 0.8s both;
-  
-  &:hover {
-    transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.2);
-  }
-  
-  @media (max-width: 768px) {
-    padding: 24px 20px;
-  }
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 32px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  animation: fadeInUp 0.8s ease 0.4s both;
 `;
 
-// Bottom Card Content
 const BottomCardContent = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  gap: 24px;
   
   @media (max-width: 768px) {
     flex-direction: column;
@@ -232,35 +220,15 @@ const BottomCardContent = styled.div`
   }
 `;
 
-// Bottom Card Icon and Text
 const BottomCardLeft = styled.div`
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   flex: 1;
   
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 12px;
-  }
-`;
-
-// Bottom Card CTA
-const BottomCardCTA = styled.button`
-  background: linear-gradient(135deg, #28A745 0%, #20C997 100%);
-  color: white;
-  border: none;
-  padding: 16px 32px;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+    gap: 16px;
   }
 `;
 
@@ -361,27 +329,6 @@ const MeetingCardDescription = styled.p`
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.9);
   margin: 0;
-`;
-
-const MeetingCTA = styled.button`
-  background: linear-gradient(135deg, #28A745 0%, #20C997 100%);
-  color: white;
-  border: none;
-  padding: 20px 40px;
-  border-radius: 50px;
-  font-size: 1.3rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 24px;
-  
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(40, 167, 69, 0.4);
-  }
 `;
 
 // Stats Section
@@ -604,10 +551,6 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleMeetingCTA = () => {
-    window.open('https://wa.me/+34671310850', '_blank');
-  };
-
   return (
     <ExplanationContainer>
       <Header>
@@ -676,7 +619,7 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
                 <BottomCardLeft>
                   <SolutionIcon>🎯</SolutionIcon>
                   <div>
-                    <SolutionTitle style={{ textAlign: 'left', marginBottom: '8px' }}>
+                    <SolutionTitle>
                       {content.solution.bottomCard?.title || 'Análisis Personalizado Completo'}
                     </SolutionTitle>
                     <SolutionDescription style={{ textAlign: 'left' }}>
@@ -684,9 +627,6 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
                     </SolutionDescription>
                   </div>
                 </BottomCardLeft>
-                <BottomCardCTA onClick={handleMeetingCTA}>
-                  {content.solution.bottomCard?.cta || 'Agendar Análisis'}
-                </BottomCardCTA>
               </BottomCardContent>
             </BottomCard>
           </SolutionGrid>
@@ -789,10 +729,6 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
               </MeetingCard>
             ))}
           </MeetingGrid>
-          <MeetingCTA onClick={handleMeetingCTA}>
-            <Calendar size={24} />
-            {content.meeting.cta}
-          </MeetingCTA>
         </MeetingSection>
       </Content>
     </ExplanationContainer>

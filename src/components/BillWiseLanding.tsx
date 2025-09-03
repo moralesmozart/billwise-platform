@@ -114,28 +114,19 @@ const ScrollIndicator = styled.div`
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  color: white;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
   z-index: 2;
   animation: bounce 2s infinite;
   
   @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateX(-50%) translateY(0);
-    }
-    40% {
-      transform: translateX(-50%) translateY(-10px);
-    }
-    60% {
-      transform: translateX(-50%) translateY(-5px);
-    }
+    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+    40% { transform: translateX(-50%) translateY(-10px); }
+    60% { transform: translateX(-50%) translateY(-5px); }
   }
-`;
-
-const ScrollText = styled.p`
-  font-size: 0.9rem;
-  margin-bottom: 8px;
-  opacity: 0.8;
 `;
 
 // Enhanced Hero Title with typing effect
@@ -495,7 +486,6 @@ const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect }) =
 
         {/* Scroll Indicator */}
         <ScrollIndicator onClick={scrollToTestimonials}>
-          <ScrollText>Ver testimonios</ScrollText>
           <ChevronDown size={24} />
         </ScrollIndicator>
       </HeroSection>
