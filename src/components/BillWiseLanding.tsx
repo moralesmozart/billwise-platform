@@ -19,6 +19,11 @@ const HeroSection = styled.section`
   justify-content: center;
   width: 100%;
   overflow: hidden;
+  
+  @media (max-width: 768px) {
+    min-height: 90vh;
+    padding: 20px 0;
+  }
 `;
 
 // Hero Background - Full width
@@ -75,6 +80,10 @@ const HeroContent = styled.div`
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    padding: 20px 15px;
+  }
 `;
 
 // Floating Action Button
@@ -183,6 +192,7 @@ const LanguageCardsGrid = styled.div`
     grid-template-columns: 1fr;
     gap: 20px;
     padding: 0 15px;
+    margin: 30px auto 0;
   }
 `;
 
@@ -197,9 +207,14 @@ const LanguageCard = styled.div<{ isHovered: boolean }>`
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   width: 100%;
   
+  @media (max-width: 768px) {
+    padding: 30px 20px;
+    border-radius: 16px;
+  }
+  
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
   }
 `;
 
@@ -249,6 +264,11 @@ const FastTrackSection = styled.section`
   background: white;
   text-align: center;
   width: 100%;
+  
+  @media (max-width: 768px) {
+    padding: 60px 15px;
+    background: #F8F9FA;
+  }
 `;
 
 // Fast Track Container - Full width
@@ -256,6 +276,11 @@ const FastTrackContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   width: 100%;
+  
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding: 0 10px;
+  }
 `;
 
 const FastTrackTitle = styled.h2`
@@ -263,6 +288,12 @@ const FastTrackTitle = styled.h2`
   font-weight: 700;
   color: #2C3E50;
   margin-bottom: 24px;
+  
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
 `;
 
 const FastTrackCTA = styled.a`
@@ -282,6 +313,14 @@ const FastTrackCTA = styled.a`
   position: relative;
   overflow: hidden;
   text-decoration: none;
+  
+  @media (max-width: 768px) {
+    padding: 16px 30px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
   
   &:hover {
     transform: translateY(-3px);
@@ -310,6 +349,10 @@ const TestimonialsSection = styled.section`
   padding: 80px 20px;
   background: #F8F9FA;
   width: 100%;
+  
+  @media (max-width: 768px) {
+    padding: 60px 15px;
+  }
 `;
 
 // Testimonials Container - Full width
@@ -317,6 +360,10 @@ const TestimonialsContainer = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
+  
+  @media (max-width: 768px) {
+    padding: 0 10px;
+  }
 `;
 
 const TestimonialsTitle = styled.h2`
@@ -325,6 +372,12 @@ const TestimonialsTitle = styled.h2`
   color: #2C3E50;
   text-align: center;
   margin-bottom: 3rem;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    line-height: 1.3;
+  }
 `;
 
 

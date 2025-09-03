@@ -154,6 +154,12 @@ const SolutionSection = styled.section`
   margin-bottom: 40px;
   backdrop-filter: blur(10px);
   animation: fadeInUp 0.8s ease 0.4s both;
+  
+  @media (max-width: 768px) {
+    padding: 30px 20px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+  }
 `;
 
 // Solution Grid - 3 cards top row, 1 card bottom row
@@ -171,6 +177,7 @@ const SolutionGrid = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 20px;
+    margin-top: 1.5rem;
   }
 `;
 
@@ -183,6 +190,11 @@ const BottomCard = styled.div`
   border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   animation: fadeInUp 0.8s ease 0.4s both;
+  
+  @media (max-width: 768px) {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
 `;
 
 const BottomCardContent = styled.div`
@@ -316,6 +328,12 @@ const InvestmentSection = styled.section`
   backdrop-filter: blur(10px);
   text-align: center;
   animation: fadeInUp 0.8s ease 1.2s both;
+  
+  @media (max-width: 768px) {
+    padding: 30px 20px;
+    border-radius: 16px;
+    margin-top: 30px;
+  }
 `;
 
 const InvestmentContainer = styled.div`
@@ -324,6 +342,10 @@ const InvestmentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  
+  @media (max-width: 768px) {
+    padding: 0 10px;
+  }
 `;
 
 const InvestmentTitle = styled.h2`
@@ -332,6 +354,12 @@ const InvestmentTitle = styled.h2`
   margin-bottom: 20px;
   color: white;
   animation: fadeInUp 0.8s ease 1.2s both;
+  
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
 `;
 
 const InvestmentCTA = styled.button`
@@ -349,6 +377,13 @@ const InvestmentCTA = styled.button`
   transition: all 0.3s ease;
   font-size: 1.2rem;
   margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    padding: 14px 24px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 280px;
+  }
   
   &:hover {
     background: rgba(255, 255, 255, 0.3);
