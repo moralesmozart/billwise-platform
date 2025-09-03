@@ -395,6 +395,7 @@ interface BillWiseLandingProps {
 
 const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect }) => {
   const [showFAB, setShowFAB] = useState(false);
+  const [language, setLanguage] = useState<'spanish' | 'portuguese' | 'english'>('spanish');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -407,6 +408,7 @@ const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect }) =
   }, []);
 
   const handleLanguageSelect = (language: 'spanish' | 'portuguese' | 'english') => {
+    setLanguage(language);
     onLanguageSelect(language);
   };
 
@@ -513,10 +515,16 @@ const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect }) =
       {/* Investment Section */}
       <FastTrackSection>
         <FastTrackContainer>
-          <FastTrackTitle>Investment of 15 euros to learn everything</FastTrackTitle>
+          <FastTrackTitle>
+            {language === 'spanish' && 'Inversión de 15€ para aprender todo'}
+            {language === 'portuguese' && 'Investimento de 15€ para aprender tudo'}
+            {language === 'english' && 'Investment of 15€ to learn everything'}
+          </FastTrackTitle>
           <FastTrackCTA onClick={() => window.open('https://wa.me/+34671310850', '_blank')}>
             <TrendingDown size={24} />
-            Schedule meeting
+            {language === 'spanish' && 'Agendar reunión'}
+            {language === 'portuguese' && 'Agendar reunião'}
+            {language === 'english' && 'Schedule meeting'}
             <ArrowRight size={24} />
           </FastTrackCTA>
         </FastTrackContainer>
