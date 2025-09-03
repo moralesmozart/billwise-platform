@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ArrowLeft, Calendar, Users, CheckCircle, Target, TrendingUp, Zap, Shield, BarChart3 } from 'lucide-react';
+import { ArrowLeft, Calendar, Users, CheckCircle, Target, TrendingUp, Zap, Shield, BarChart3, Star } from 'lucide-react';
 
 interface BillWiseExplanationProps {
   language: 'spanish' | 'portuguese' | 'english';
   onBack: () => void;
 }
 
-// Styled Components
+// Enhanced Styled Components
 const ExplanationContainer = styled.div`
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -18,8 +18,17 @@ const ExplanationContainer = styled.div`
 const Header = styled.header`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
   margin-bottom: 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(102, 126, 234, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 16px 20px;
+  border-radius: 16px;
+  margin: -20px -20px 40px -20px;
 `;
 
 const BackButton = styled.button`
@@ -41,6 +50,31 @@ const BackButton = styled.button`
   }
 `;
 
+const ProgressBar = styled.div`
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0 20px;
+`;
+
+const ProgressFill = styled.div<{ progress: number }>`
+  height: 100%;
+  background: linear-gradient(90deg, #28A745, #20C997);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+  width: ${props => props.progress}%;
+`;
+
+const ProgressText = styled.span`
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+`;
+
 const Content = styled.div`
   max-width: 1200px;
   margin: 0 auto;
@@ -52,6 +86,18 @@ const Title = styled.h1`
   font-weight: 700;
   margin-bottom: 2rem;
   text-align: center;
+  animation: fadeInUp 0.8s ease;
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -64,6 +110,7 @@ const ProblemSection = styled.section`
   padding: 40px;
   margin-bottom: 40px;
   backdrop-filter: blur(10px);
+  animation: fadeInUp 0.8s ease 0.2s both;
 `;
 
 const SectionTitle = styled.h2`
@@ -82,12 +129,13 @@ const ProblemGrid = styled.div`
   margin-top: 32px;
 `;
 
-const ProblemCard = styled.div`
+const ProblemCard = styled.div<{ index: number }>`
   background: rgba(255, 255, 255, 0.15);
   border-radius: 16px;
   padding: 24px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease ${props => 0.4 + props.index * 0.1}s both;
   
   &:hover {
     transform: translateY(-4px);
@@ -129,6 +177,7 @@ const SolutionSection = styled.section`
   padding: 40px;
   margin-bottom: 40px;
   backdrop-filter: blur(10px);
+  animation: fadeInUp 0.8s ease 0.4s both;
 `;
 
 // Solution Grid - 3 cards top row, 1 card bottom row
@@ -158,6 +207,7 @@ const BottomCard = styled.div`
   text-align: center;
   transition: all 0.3s ease;
   width: 100%;
+  animation: fadeInUp 0.8s ease 0.8s both;
   
   &:hover {
     transform: translateY(-4px);
@@ -214,12 +264,13 @@ const BottomCardCTA = styled.button`
   }
 `;
 
-const SolutionCard = styled.div`
+const SolutionCard = styled.div<{ index: number }>`
   background: rgba(255, 255, 255, 0.15);
   border-radius: 16px;
   padding: 24px;
   text-align: center;
   transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease ${props => 0.6 + props.index * 0.1}s both;
   
   &:hover {
     transform: translateY(-4px);
@@ -252,8 +303,6 @@ const SolutionDescription = styled.p`
   opacity: 0.9;
 `;
 
-
-
 const MeetingSection = styled.section`
   background: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
@@ -261,6 +310,7 @@ const MeetingSection = styled.section`
   margin-bottom: 40px;
   backdrop-filter: blur(10px);
   text-align: center;
+  animation: fadeInUp 0.8s ease 1s both;
 `;
 
 const MeetingGrid = styled.div`
@@ -270,13 +320,14 @@ const MeetingGrid = styled.div`
   margin: 32px 0;
 `;
 
-const MeetingCard = styled.div`
+const MeetingCard = styled.div<{ index: number }>`
   background: rgba(255, 255, 255, 0.15);
   border-radius: 16px;
   padding: 24px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
   text-align: center;
+  animation: fadeInUp 0.6s ease ${props => 1.2 + props.index * 0.1}s both;
   
   &:hover {
     transform: translateY(-4px);
@@ -333,6 +384,43 @@ const MeetingCTA = styled.button`
   }
 `;
 
+// Stats Section
+const StatsSection = styled.section`
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  margin-bottom: 40px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  animation: fadeInUp 0.8s ease 1.4s both;
+`;
+
+const StatsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+`;
+
+const StatCard = styled.div`
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+`;
+
+const StatNumber = styled.div`
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #FFD700;
+  margin-bottom: 8px;
+`;
+
+const StatLabel = styled.div`
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+`;
+
 // Language-specific content
 const languageContent = {
   spanish: {
@@ -386,7 +474,7 @@ const languageContent = {
         "Cálculo exacto de ahorro anual",
         "Recomendaciones específicas para tu caso"
       ],
-      cta: "Agendar Reunión Gratuita"
+      cta: "Agendar Reunión"
     }
   },
   portuguese: {
@@ -440,7 +528,7 @@ const languageContent = {
         "Cálculo exato de economia anual",
         "Recomendações específicas para seu caso"
       ],
-      cta: "Agendar Reunião Gratuita"
+      cta: "Agendar Reunião"
     }
   },
   english: {
@@ -494,16 +582,29 @@ const languageContent = {
         "Exact annual savings calculation",
         "Specific recommendations for your case"
       ],
-      cta: "Schedule Free Meeting"
+      cta: "Schedule Meeting"
     }
   }
 };
 
 const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onBack }) => {
+  const [progress, setProgress] = useState(0);
   const content = languageContent[language];
 
+  useEffect(() => {
+    // Simulate progress as user scrolls
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      setProgress(Math.min(scrollPercent, 100));
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleMeetingCTA = () => {
-    // Redirect to WhatsApp for scheduling
     window.open('https://wa.me/+34671310850', '_blank');
   };
 
@@ -514,6 +615,12 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
           <ArrowLeft size={20} />
           Volver
         </BackButton>
+        
+        <ProgressBar>
+          <ProgressFill progress={progress} />
+        </ProgressBar>
+        
+        <ProgressText>{Math.round(progress)}%</ProgressText>
       </Header>
 
       <Content>
@@ -527,7 +634,7 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
           </SectionTitle>
           <ProblemGrid>
             {content.problem.items.map((item, index) => (
-              <ProblemCard key={index}>
+              <ProblemCard key={index} index={index}>
                 <ProblemCardIcon>
                   {index === 0 && <BarChart3 size={24} />}
                   {index === 1 && <TrendingUp size={24} />}
@@ -556,7 +663,7 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
           </SectionTitle>
           <SolutionGrid>
             {content.solution.items.map((item, index) => (
-              <SolutionCard key={index}>
+              <SolutionCard key={index} index={index}>
                 <SolutionIcon>{item.icon}</SolutionIcon>
                 <SolutionTitle>{item.title}</SolutionTitle>
                 <SolutionDescription>{item.description}</SolutionDescription>
@@ -585,7 +692,31 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
           </SolutionGrid>
         </SolutionSection>
 
-
+        {/* Stats Section */}
+        <StatsSection>
+          <SectionTitle>
+            <Star size={32} />
+            Nuestros Resultados
+          </SectionTitle>
+          <StatsGrid>
+            <StatCard>
+              <StatNumber>85%</StatNumber>
+              <StatLabel>Clientes que no entienden sus facturas</StatLabel>
+            </StatCard>
+            <StatCard>
+              <StatNumber>50-80€</StatNumber>
+              <StatLabel>Ahorro mensual promedio</StatLabel>
+            </StatCard>
+            <StatCard>
+              <StatNumber>15-30</StatNumber>
+              <StatLabel>Minutos de análisis gratuito</StatLabel>
+            </StatCard>
+            <StatCard>
+              <StatNumber>100%</StatNumber>
+              <StatLabel>Gratis y sin compromiso</StatLabel>
+            </StatCard>
+          </StatsGrid>
+        </StatsSection>
 
         {/* Meeting Section */}
         <MeetingSection>
@@ -596,9 +727,50 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
           <p style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>
             {content.meeting.description}
           </p>
+          
+          {/* Pricing Card */}
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.15)',
+            borderRadius: '16px',
+            padding: '24px',
+            margin: '32px auto',
+            maxWidth: '400px',
+            textAlign: 'center',
+            border: '2px solid rgba(255, 255, 255, 0.2)',
+            backdropFilter: 'blur(10px)'
+          }}>
+            <div style={{
+              fontSize: '2rem',
+              fontWeight: '700',
+              color: '#FFD700',
+              marginBottom: '8px'
+            }}>
+              💰
+            </div>
+            <div style={{
+              fontSize: '1.5rem',
+              fontWeight: '700',
+              color: 'white',
+              marginBottom: '8px'
+            }}>
+              {language === 'spanish' && 'Inversión 15 euros para aprender sobre ello'}
+              {language === 'portuguese' && 'Investimento 15 euros para aprender sobre isso'}
+              {language === 'english' && 'Investment 15 euros to learn about it'}
+            </div>
+            <div style={{
+              fontSize: '1rem',
+              color: 'rgba(255, 255, 255, 0.8)',
+              lineHeight: '1.5'
+            }}>
+              {language === 'spanish' && 'Pequeña inversión para grandes ahorros'}
+              {language === 'portuguese' && 'Pequeno investimento para grandes economias'}
+              {language === 'english' && 'Small investment for big savings'}
+            </div>
+          </div>
+          
           <MeetingGrid>
             {content.meeting.benefits.map((benefit, index) => (
-              <MeetingCard key={index}>
+              <MeetingCard key={index} index={index}>
                 <MeetingCardIcon>
                   {index === 0 && <BarChart3 size={24} />}
                   {index === 1 && <TrendingUp size={24} />}

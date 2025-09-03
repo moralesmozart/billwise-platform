@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ArrowRight, TrendingDown } from 'lucide-react';
+import { ArrowRight, TrendingDown, ChevronDown, MessageCircle } from 'lucide-react';
 import TestimonialsCarousel from './TestimonialsCarousel';
 
 // Main Container - Full width
@@ -77,12 +77,86 @@ const HeroContent = styled.div`
   margin: 0 auto;
 `;
 
+// Floating Action Button
+const FloatingActionButton = styled.button<{ isVisible: boolean }>`
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #28A745 0%, #20C997 100%);
+  border: none;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'scale(1)' : 'scale(0.8)'};
+  
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(40, 167, 69, 0.6);
+  }
+  
+  @media (max-width: 768px) {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+`;
+
+// Scroll Indicator
+const ScrollIndicator = styled.div`
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
+  z-index: 2;
+  animation: bounce 2s infinite;
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    40% {
+      transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+      transform: translateX(-50%) translateY(-5px);
+    }
+  }
+`;
+
+const ScrollText = styled.p`
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  opacity: 0.8;
+`;
+
+// Enhanced Hero Title with typing effect
 const HeroTitle = styled.h1`
   font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   line-height: 1.2;
   color: white;
+  position: relative;
+  
+  &::after {
+    content: '|';
+    animation: blink 1s infinite;
+    margin-left: 4px;
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -329,8 +403,31 @@ interface BillWiseLandingProps {
 }
 
 const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect }) => {
+  const [showFAB, setShowFAB] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setShowFAB(scrollTop > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleLanguageSelect = (language: 'spanish' | 'portuguese' | 'english') => {
     onLanguageSelect(language);
+  };
+
+  const handleFABClick = () => {
+    window.open('https://wa.me/+34671310850', '_blank');
+  };
+
+  const scrollToTestimonials = () => {
+    const testimonialsSection = document.querySelector('[data-section="testimonials"]');
+    if (testimonialsSection) {
+      testimonialsSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -395,28 +492,38 @@ const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect }) =
             </LanguageCard>
           </LanguageCardsGrid>
         </HeroContent>
+
+        {/* Scroll Indicator */}
+        <ScrollIndicator onClick={scrollToTestimonials}>
+          <ScrollText>Ver testimonios</ScrollText>
+          <ChevronDown size={24} />
+        </ScrollIndicator>
       </HeroSection>
 
       {/* Fast Track Section */}
       <FastTrackSection>
-                  <FastTrackContainer>
-            <FastTrackTitle>¿No tienes tiempo? Solo quieres 50-80€ de descuento</FastTrackTitle>
-            <FastTrackCTA href="https://share.octopusenergy.es/jolly-gull-677" target="_blank" rel="noopener noreferrer">
-              <TrendingDown size={24} />
-              Cambiar al mejor proveedor ahora
-              <ArrowRight size={24} />
-            </FastTrackCTA>
-          </FastTrackContainer>
+        <FastTrackContainer>
+          <FastTrackTitle>¿No tienes tiempo? Solo quieres 50-80€ de descuento</FastTrackTitle>
+          <FastTrackCTA href="https://share.octopusenergy.es/jolly-gull-677" target="_blank" rel="noopener noreferrer">
+            <TrendingDown size={24} />
+            Cambiar al mejor proveedor ahora
+            <ArrowRight size={24} />
+          </FastTrackCTA>
+        </FastTrackContainer>
       </FastTrackSection>
 
       {/* Testimonials Section */}
-      <TestimonialsSection>
+      <TestimonialsSection data-section="testimonials">
         <TestimonialsContainer>
           <TestimonialsTitle>Resultados reales de personas alrededor del mundo</TestimonialsTitle>
           <TestimonialsCarousel testimonials={testimonials} />
         </TestimonialsContainer>
       </TestimonialsSection>
 
+      {/* Floating Action Button */}
+      <FloatingActionButton isVisible={showFAB} onClick={handleFABClick}>
+        <MessageCircle size={24} />
+      </FloatingActionButton>
     </LandingContainer>
   );
 };

@@ -1,0 +1,59 @@
+{
+  "name": "BillWise - Entiende tus facturas de electricidad y agua",
+  "short_name": "BillWise",
+  "description": "Plataforma para entender facturas de electricidad y agua en España. Ahorra dinero con nuestro análisis personalizado.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es",
+  "categories": ["business", "finance", "utilities"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32",
+      "type": "image/x-icon"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.svg",
+      "sizes": "1200x630",
+      "type": "image/svg+xml",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Análisis en Español",
+      "short_name": "Español",
+      "description": "Entiende tu factura en español",
+      "url": "/explanation/spanish",
+      "icons": [{ "src": "/favicon.svg", "sizes": "96x96" }]
+    },
+    {
+      "name": "Análisis em Português",
+      "short_name": "Português",
+      "description": "Entenda sua fatura em português",
+      "url": "/explanation/portuguese",
+      "icons": [{ "src": "/favicon.svg", "sizes": "96x96" }]
+    },
+    {
+      "name": "Analysis in English",
+      "short_name": "English",
+      "description": "Understand your bill in English",
+      "url": "/explanation/english",
+      "icons": [{ "src": "/favicon.svg", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

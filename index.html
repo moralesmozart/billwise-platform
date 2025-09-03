@@ -8,11 +8,22 @@
     <link rel="icon" type="image/png" href="./favicon.png" />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
     
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json" />
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="BillWise - Entiende tus facturas de electricidad y agua en España. Ahorra dinero con nuestro análisis personalizado. Análisis gratuito en 15-30 minutos." />
     <meta name="keywords" content="facturas, electricidad, agua, ahorro, energía, España, análisis, valle, punta, llano, optimización, consumo" />
     <meta name="author" content="BillWise" />
     <meta name="robots" content="index, follow" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="BillWise" />
+    <meta name="msapplication-TileColor" content="#667eea" />
+    <meta name="msapplication-config" content="./browserconfig.xml" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -38,10 +49,64 @@
     
     <title>BillWise - Entiende tus facturas de electricidad y agua en España</title>
     
+    <!-- Preload critical resources -->
+    <link rel="preload" href="./src/main.tsx" as="script" />
+    <link rel="dns-prefetch" href="//wa.me" />
+    
     <!-- React dependencies are bundled with Vite for better compatibility -->
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="./src/main.tsx"></script>
+    
+    <!-- PWA Install Prompt -->
+    <script>
+      // PWA install prompt
+      let deferredPrompt;
+      
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        // Show custom install button
+        const installButton = document.createElement('button');
+        installButton.textContent = 'Instalar App';
+        installButton.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #28A745;
+          color: white;
+          border: none;
+          padding: 12px 20px;
+          border-radius: 25px;
+          cursor: pointer;
+          z-index: 10000;
+          font-weight: 600;
+        `;
+        
+        installButton.addEventListener('click', () => {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('User accepted the install prompt');
+            } else {
+              console.log('User dismissed the install prompt');
+            }
+            deferredPrompt = null;
+            installButton.remove();
+          });
+        });
+        
+        document.body.appendChild(installButton);
+        
+        // Auto-hide after 10 seconds
+        setTimeout(() => {
+          if (installButton.parentNode) {
+            installButton.remove();
+          }
+        }, 10000);
+      });
+    </script>
   </body>
 </html>
