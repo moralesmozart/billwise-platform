@@ -522,9 +522,9 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
                   {index === 2 && <Zap size={24} />}
                 </ProblemCardIcon>
                 <ProblemCardTitle>
-                  {index === 0 && 'Confusión en Terminología'}
-                  {index === 1 && 'Costos Inesperados'}
-                  {index === 2 && 'Oportunidades Perdidas'}
+                  {index === 0 && (language === 'spanish' ? 'Confusión en Terminología' : language === 'portuguese' ? 'Confusão na Terminologia' : 'Terminology Confusion')}
+                  {index === 1 && (language === 'spanish' ? 'Costes Inesperados' : language === 'portuguese' ? 'Custos Inesperados' : 'Unexpected Costs')}
+                  {index === 2 && (language === 'spanish' ? 'Oportunidades Perdidas' : language === 'portuguese' ? 'Oportunidades Perdidas' : 'Lost Opportunities')}
                 </ProblemCardTitle>
                 <ProblemCardDescription>{item}</ProblemCardDescription>
               </ProblemCard>
@@ -569,9 +569,9 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
                   {index === 2 && <Zap size={24} />}
                 </MeetingCardIcon>
                 <MeetingCardTitle>
-                  {index === 0 && 'Análisis Completo'}
-                  {index === 1 && 'Planilla Detallada'}
-                  {index === 2 && 'Opciones de Optimización'}
+                  {index === 0 && (language === 'spanish' ? 'Análisis Completo' : language === 'portuguese' ? 'Análise Completa' : 'Complete Analysis')}
+                  {index === 1 && (language === 'spanish' ? 'Planilla Detallada' : language === 'portuguese' ? 'Planilha Detalhada' : 'Detailed Spreadsheet')}
+                  {index === 2 && (language === 'spanish' ? 'Opciones de Optimización' : language === 'portuguese' ? 'Opções de Otimização' : 'Optimization Options')}
                 </MeetingCardTitle>
                 <MeetingCardDescription>{benefit}</MeetingCardDescription>
               </MeetingCard>

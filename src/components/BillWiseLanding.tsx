@@ -493,7 +493,7 @@ const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect }) =
         <HeroContent>
           <HeroTitle>BillWise</HeroTitle>
           <HeroSubtitle>
-            ¿No sabes qué significa 'valle, punta, llano'? ¿También te sorprende cuánto pagas en tu factura de electricidad? 
+            ¿También te sorprende cuánto pagas en tu factura de electricidad? 
             No te preocupes, no estás solo. +85% de los clientes de electricidad no saben cómo funciona o si están pagando un precio justo.
           </HeroSubtitle>
           
