@@ -499,7 +499,7 @@ const BillWiseLanding: React.FC<BillWiseLandingProps> = ({ onLanguageSelect }) =
           
           <LanguageCardsGrid>
             <LanguageCard isHovered={false} onClick={() => handleLanguageSelect('portuguese')}>
-              <LanguageFlag>🇵🇹</LanguageFlag>
+              <LanguageFlag>🇧🇷</LanguageFlag>
               <LanguageTitle>Português</LanguageTitle>
               <LanguageDescription>
                 Entenda sua fatura de eletricidade e água em português. 

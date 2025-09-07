@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ArrowLeft, Users, CheckCircle, Target, TrendingUp, Zap, Shield, BarChart3, TrendingDown, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Users, CheckCircle, Target, TrendingUp, Zap, BarChart3, TrendingDown, ArrowRight } from 'lucide-react';
 
 interface BillWiseExplanationProps {
   language: 'spanish' | 'portuguese' | 'english';
@@ -181,44 +181,6 @@ const SolutionGrid = styled.div`
   }
 `;
 
-// Bottom Card - Takes full width
-const BottomCard = styled.div`
-  grid-column: 1 / -1;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 32px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  animation: fadeInUp 0.8s ease 0.4s both;
-  
-  @media (max-width: 768px) {
-    padding: 24px 20px;
-    border-radius: 16px;
-  }
-`;
-
-const BottomCardContent = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-  }
-`;
-
-const BottomCardLeft = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex: 1;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 16px;
-  }
-`;
 
 const SolutionCard = styled.div<{ index: number }>`
   background: rgba(255, 255, 255, 0.15);
@@ -400,9 +362,7 @@ const languageContent = {
       items: [
         "85% de los clientes no saben qué significa 'valle', 'punta', 'llano'",
         "No entienden por qué pagan tanto en su factura mensual",
-        "No saben identificar oportunidades de ahorro",
-        "No conocen las mejores tarifas disponibles",
-        "No entienden los conceptos de su factura"
+        "No saben identificar oportunidades de ahorro"
       ]
     },
     solution: {
@@ -424,11 +384,6 @@ const languageContent = {
           description: "Te enseñamos cuándo usar más energía para pagar menos"
         }
       ],
-      bottomCard: {
-        title: "Análisis Personalizado Completo",
-        description: "Recibe un análisis detallado con recomendaciones específicas para tu caso",
-        cta: "Quiero entender mi factura ahora"
-      }
     },
     chart: {
       title: "Análisis de Costos y Ahorros",
@@ -440,9 +395,7 @@ const languageContent = {
       benefits: [
         "Análisis completo de tu factura actual",
         "Planilla detallada con todos los costos",
-        "Opciones de optimización disponibles",
-        "Cálculo exacto de ahorro anual",
-        "Recomendaciones específicas para tu caso"
+        "Opciones de optimización disponibles"
       ],
       cta: "Agendar Reunión"
     }
@@ -454,9 +407,7 @@ const languageContent = {
       items: [
         "85% dos clientes não sabem o que significa 'valle', 'punta', 'llano'",
         "Não entendem por que pagam tanto na fatura mensal",
-        "Não sabem identificar oportunidades de economia",
-        "Não conhecem as melhores tarifas disponíveis",
-        "Não entendem os conceitos da sua fatura"
+        "Não sabem identificar oportunidades de economia"
       ]
     },
     solution: {
@@ -478,11 +429,6 @@ const languageContent = {
           description: "Ensinamos quando usar mais energia para pagar menos"
         }
       ],
-      bottomCard: {
-        title: "Análise Personalizada Completa",
-        description: "Receba uma análise detalhada com recomendações específicas para seu caso",
-        cta: "Quero entender minha fatura agora"
-      }
     },
     chart: {
       title: "Análise de Custos e Economias",
@@ -494,9 +440,7 @@ const languageContent = {
       benefits: [
         "Análise completa da sua fatura atual",
         "Planilha detalhada com todos os custos",
-        "Opções de otimização disponíveis",
-        "Cálculo exato de economia anual",
-        "Recomendações específicas para seu caso"
+        "Opções de otimização disponíveis"
       ],
       cta: "Agendar Reunião"
     }
@@ -508,9 +452,7 @@ const languageContent = {
       items: [
         "85% of customers don't know what 'valle', 'punta', 'llano' means",
         "They don't understand why they pay so much monthly",
-        "They can't identify savings opportunities",
-        "They don't know the best available rates",
-        "They don't understand bill concepts"
+        "They can't identify savings opportunities"
       ]
     },
     solution: {
@@ -532,11 +474,6 @@ const languageContent = {
           description: "We teach you when to use more energy to pay less"
         }
       ],
-      bottomCard: {
-        title: "Complete Personalized Analysis",
-        description: "Receive a detailed analysis with specific recommendations for your case",
-        cta: "I want to understand my bill now"
-      }
     },
     chart: {
       title: "Cost Analysis and Savings",
@@ -548,9 +485,7 @@ const languageContent = {
       benefits: [
         "Complete analysis of your current bill",
         "Detailed spreadsheet with all costs",
-        "Available optimization options",
-        "Exact annual savings calculation",
-        "Specific recommendations for your case"
+        "Available optimization options"
       ],
       cta: "Schedule Meeting"
     }
@@ -585,15 +520,11 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
                   {index === 0 && <BarChart3 size={24} />}
                   {index === 1 && <TrendingUp size={24} />}
                   {index === 2 && <Zap size={24} />}
-                  {index === 3 && <Shield size={24} />}
-                  {index === 4 && <Target size={24} />}
                 </ProblemCardIcon>
                 <ProblemCardTitle>
                   {index === 0 && 'Confusión en Terminología'}
                   {index === 1 && 'Costos Inesperados'}
                   {index === 2 && 'Oportunidades Perdidas'}
-                  {index === 3 && 'Tarifas Desconocidas'}
-                  {index === 4 && 'Conceptos Incomprensibles'}
                 </ProblemCardTitle>
                 <ProblemCardDescription>{item}</ProblemCardDescription>
               </ProblemCard>
@@ -615,23 +546,6 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
                 <SolutionDescription>{item.description}</SolutionDescription>
               </SolutionCard>
             ))}
-            
-            {/* Bottom Card - Full Width */}
-            <BottomCard>
-              <BottomCardContent>
-                <BottomCardLeft>
-                  <SolutionIcon>🎯</SolutionIcon>
-                  <div>
-                    <SolutionTitle>
-                      {content.solution.bottomCard?.title || 'Análisis Personalizado Completo'}
-                    </SolutionTitle>
-                    <SolutionDescription style={{ textAlign: 'left' }}>
-                      {content.solution.bottomCard?.description || 'Recibe un análisis detallado con recomendaciones específicas para tu caso'}
-                    </SolutionDescription>
-                  </div>
-                </BottomCardLeft>
-              </BottomCardContent>
-            </BottomCard>
           </SolutionGrid>
         </SolutionSection>
 
@@ -645,45 +559,6 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
             {content.meeting.description}
           </p>
           
-          {/* Pricing Card */}
-          <div style={{
-            background: 'rgba(255, 255, 255, 0.15)',
-            borderRadius: '16px',
-            padding: '24px',
-            margin: '32px auto',
-            maxWidth: '400px',
-            textAlign: 'center',
-            border: '2px solid rgba(255, 255, 255, 0.2)',
-            backdropFilter: 'blur(10px)'
-          }}>
-            <div style={{
-              fontSize: '2rem',
-              fontWeight: '700',
-              color: '#FFD700',
-              marginBottom: '8px'
-            }}>
-              💰
-            </div>
-            <div style={{
-              fontSize: '1.5rem',
-              fontWeight: '700',
-              color: 'white',
-              marginBottom: '8px'
-            }}>
-              {language === 'spanish' && 'Inversión 15 euros para aprender sobre ello'}
-              {language === 'portuguese' && 'Investimento 15 euros para aprender sobre isso'}
-              {language === 'english' && 'Investment 15 euros to learn about it'}
-            </div>
-            <div style={{
-              fontSize: '1rem',
-              color: 'rgba(255, 255, 255, 0.8)',
-              lineHeight: '1.5'
-            }}>
-              {language === 'spanish' && 'Pequeña inversión para grandes ahorros'}
-              {language === 'portuguese' && 'Pequeno investimento para grandes economias'}
-              {language === 'english' && 'Small investment for big savings'}
-            </div>
-          </div>
           
           <MeetingGrid>
             {content.meeting.benefits.map((benefit, index) => (
@@ -692,15 +567,11 @@ const BillWiseExplanation: React.FC<BillWiseExplanationProps> = ({ language, onB
                   {index === 0 && <BarChart3 size={24} />}
                   {index === 1 && <TrendingUp size={24} />}
                   {index === 2 && <Zap size={24} />}
-                  {index === 3 && <Shield size={24} />}
-                  {index === 4 && <Target size={24} />}
                 </MeetingCardIcon>
                 <MeetingCardTitle>
                   {index === 0 && 'Análisis Completo'}
                   {index === 1 && 'Planilla Detallada'}
                   {index === 2 && 'Opciones de Optimización'}
-                  {index === 3 && 'Cálculo de Ahorros'}
-                  {index === 4 && 'Recomendaciones Específicas'}
                 </MeetingCardTitle>
                 <MeetingCardDescription>{benefit}</MeetingCardDescription>
               </MeetingCard>

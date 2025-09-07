@@ -50,7 +50,10 @@ const AppContent: React.FC = () => {
       await new Promise(resolve => setTimeout(resolve, 300));
       navigate(`/explanation/${language}`);
     } catch (error) {
-      console.error('Navigation error:', error);
+      // Navigation error handled silently in production
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Navigation error:', error);
+      }
     } finally {
       setIsLoading(false);
     }
