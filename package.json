@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Plataforma para entender facturas de electricidad y agua en España",
   "private": true,
+  "type": "module",
   "homepage": "https://moralesmozart.github.io/billwise-platform",
   "scripts": {
     "dev": "vite",

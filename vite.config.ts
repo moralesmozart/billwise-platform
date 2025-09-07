@@ -14,8 +14,6 @@ export default defineConfig({
         assetFileNames: 'assets/[name][extname]',
         chunkFileNames: 'assets/[name].js',
         entryFileNames: 'assets/[name].js',
-        // Ensure proper module format
-        format: 'es',
         // Manual chunk splitting for better caching
         manualChunks: {
           vendor: ['react', 'react-dom'],
