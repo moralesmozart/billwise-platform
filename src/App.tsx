@@ -51,7 +51,8 @@ const AppContent: React.FC = () => {
       navigate(`/explanation/${language}`);
     } catch (error) {
       // Navigation error handled silently in production
-      if (process.env.NODE_ENV === 'development') {
+      // Only log in development mode
+      if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
         console.error('Navigation error:', error);
       }
     } finally {
